@@ -9,44 +9,46 @@ References:
 
 **Topics**
 + [Actions Defined by AWS Direct Connect](#awsdirectconnect-actions-as-permissions)
-+ [Resources Defined by Direct Connect](#awsdirectconnect-resources-for-iam-policies)
++ [Resources Defined by AWS Direct Connect](#awsdirectconnect-resources-for-iam-policies)
 + [Condition Keys for AWS Direct Connect](#awsdirectconnect-policy-keys)
 
 ## Actions Defined by AWS Direct Connect<a name="awsdirectconnect-actions-as-permissions"></a>
 
-You can specify the following actions in the `Action` element of an IAM policy statement\. By using policies, you define the permissions for anyone performing an operation in AWS\. When you use an action in a policy, you usually allow or deny access to the API operation or CLI command with the same name\. However, in some cases, a single action controls access to more than one operation\. Alternatively, some operations require several different actions\. For details about the columns in the following table, see [The Actions Table](reference_policies_actions-resources-contextkeys.md#actions_table)\.
+You can specify the following actions in the `Action` element of an IAM policy statement\. Use policies to grant permissions to perform an operation in AWS\. When you use an action in a policy, you usually allow or deny access to the API operation or CLI command with the same name\. However, in some cases, a single action controls access to more than one operation\. Alternatively, some operations require several different actions\.
+
+The **Resource** column indicates whether each action supports resource\-level permissions\. If there is no value for this column, you must specify all resources \("\*"\) in the `Resource` element of your policy statement\. If the column includes a resource type, then you can specify an ARN of that type in a statement with that action\. Required resources are indicated in the table with an asterisk \(\*\)\. If you specify a resource\-level permission ARN in a statement using this action, then it must be of this type\. Some actions support multiple resource types\. If the resource type is optional \(not indicated as required\), then you can choose to use one but not the other\.
+
+For details about the columns in the following table, see [The Actions Table](reference_policies_actions-resources-contextkeys.md#actions_table)\.
+
+
+****  
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/IAM/latest/UserGuide/list_awsdirectconnect.html)
+
+## Resources Defined by AWS Direct Connect<a name="awsdirectconnect-resources-for-iam-policies"></a>
+
+The following resource types are defined by this service and can be used in the `Resource` element of IAM permission policy statements\. Each action in the [Actions table](#awsdirectconnect-actions-as-permissions) identifies the resource types that can be specified with that action\. A resource type can also define which condition keys you can include in a policy\. These keys are displayed in the last column of the table\. For details about the columns in the following table, see [The Resource Types Table](reference_policies_actions-resources-contextkeys.md#resources_table)\.
 
 
 ****  
 
-| Actions | Description | Access Level | Resource Types \(\*required\) | Condition Keys | Dependent Actions | 
-| --- | --- | --- | --- | --- | --- | 
-|   [ AllocateConnectionOnInterconnect ](https://docs.aws.amazon.com/directconnect/latest/APIReference/API_AllocateConnectionOnInterconnect.html)  | Creates a hosted connection on an interconnect\. | Write |  |  |  | 
-|   [ AllocatePrivateVirtualInterface ](https://docs.aws.amazon.com/directconnect/latest/APIReference/API_AllocatePrivateVirtualInterface.html)  | Provisions a private virtual interface to be owned by a different customer\. | Write |  |  |  | 
-|   [ AllocatePublicVirtualInterface ](https://docs.aws.amazon.com/directconnect/latest/APIReference/API_AllocatePublicVirtualInterface.html)  | Provisions a public virtual interface to be owned by a different customer\. | Write |  |  |  | 
-|   [ ConfirmConnection ](https://docs.aws.amazon.com/directconnect/latest/APIReference/API_ConfirmConnection.html)  | Confirm the creation of a hosted connection on an interconnect\. | Read |  |  |  | 
-|   [ ConfirmPrivateVirtualInterface ](https://docs.aws.amazon.com/directconnect/latest/APIReference/API_ConfirmPrivateVirtualInterface.html)  | Accept ownership of a private virtual interface created by another customer\. | Read |  |  |  | 
-|   [ ConfirmPublicVirtualInterface ](https://docs.aws.amazon.com/directconnect/latest/APIReference/API_ConfirmPublicVirtualInterface.html)  | Accept ownership of a public virtual interface created by another customer | Read |  |  |  | 
-|   [ CreateConnection ](https://docs.aws.amazon.com/directconnect/latest/APIReference/API_CreateConnection.html)  | Creates a new connection between the customer network and a specific AWS Direct Connect location\. | Write |  |  |  | 
-|   [ CreateInterconnect ](https://docs.aws.amazon.com/directconnect/latest/APIReference/API_CreateInterconnect.html)  | Creates a new interconnect between a AWS Direct Connect partner's network and a specific AWS Direct Connect location\. | Write |  |  |  | 
-|   [ CreatePrivateVirtualInterface ](https://docs.aws.amazon.com/directconnect/latest/APIReference/API_CreatePrivateVirtualInterface.html)  | Creates a new private virtual interface\. | Write |  |  |  | 
-|   [ CreatePublicVirtualInterface ](https://docs.aws.amazon.com/directconnect/latest/APIReference/API_CreatePublicVirtualInterface.html)  | Creates a new public virtual interface\. | Write |  |  |  | 
-|   [ DeleteConnection ](https://docs.aws.amazon.com/directconnect/latest/APIReference/API_DeleteConnection.html)  | Deletes the connection\. | Write |  |  |  | 
-|   [ DeleteInterconnect ](https://docs.aws.amazon.com/directconnect/latest/APIReference/API_DeleteInterconnect.html)  | Deletes the specified interconnect\. | Write |  |  |  | 
-|   [ DeleteVirtualInterface ](https://docs.aws.amazon.com/directconnect/latest/APIReference/API_DeleteVirtualInterface.html)  | Deletes a virtual interface\. | Write |  |  |  | 
-|   [ DescribeConnectionLoa ](https://docs.aws.amazon.com/directconnect/latest/APIReference/API_DescribeConnectionLoa.html)  | Returns the LOA\-CFA for a Connection\. | List |  |  |  | 
-|   [ DescribeConnections ](https://docs.aws.amazon.com/directconnect/latest/APIReference/API_DescribeConnections.html)  | Displays all connections in this region\. | List |  |  |  | 
-|   [ DescribeConnectionsOnInterconnect ](https://docs.aws.amazon.com/directconnect/latest/APIReference/API_DescribeConnectionsOnInterconnect.html)  | Return a list of connections that have been provisioned on the given interconnect\. | List |  |  |  | 
-|   [ DescribeInterconnectLoa ](https://docs.aws.amazon.com/directconnect/latest/APIReference/API_DescribeInterconnectLoa.html)  | Returns the LOA\-CFA for an Interconnect\. | List |  |  |  | 
-|   [ DescribeInterconnects ](https://docs.aws.amazon.com/directconnect/latest/APIReference/API_DescribeInterconnects.html)  | Returns a list of interconnects owned by the AWS account\. | List |  |  |  | 
-|   [ DescribeLocations ](https://docs.aws.amazon.com/directconnect/latest/APIReference/API_DescribeLocations.html)  | Returns the list of AWS Direct Connect locations in the current AWS region\. | List |  |  |  | 
-|   [ DescribeVirtualGateways ](https://docs.aws.amazon.com/directconnect/latest/APIReference/API_DescribeVirtualGateways.html)  | Returns a list of virtual private gateways owned by the AWS account\. | List |  |  |  | 
-|   [ DescribeVirtualInterfaces ](https://docs.aws.amazon.com/directconnect/latest/APIReference/API_DescribeVirtualInterfaces.html)  | Displays all virtual interfaces for an AWS account\. | List |  |  |  | 
-
-## Resources Defined by Direct Connect<a name="awsdirectconnect-resources-for-iam-policies"></a>
-
-AWS Direct Connect has no service\-defined resources that can be used as the `Resource` element of an IAM policy statement\.
+| Resource Types | ARN | Condition Keys | 
+| --- | --- | --- | 
+|   [ dxcon ](https://docs.aws.amazon.com/directconnect/latest/APIReference/API_Connection.html)  |  arn:$\{Partition\}:directconnect:$\{Region\}:$\{Account\}:dxcon/$\{ConnectionId\}  |   [ aws:ResourceTag/$\{TagKey\} ](#awsdirectconnect-aws_ResourceTag___TagKey_)   | 
+|   [ dxlag ](https://docs.aws.amazon.com/directconnect/latest/APIReference/API_Lag.html)  |  arn:$\{Partition\}:directconnect:$\{Region\}:$\{Account\}:dxlag/$\{LagId\}  |   [ aws:ResourceTag/$\{TagKey\} ](#awsdirectconnect-aws_ResourceTag___TagKey_)   | 
+|   [ dxvif ](https://docs.aws.amazon.com/directconnect/latest/APIReference/API_VirtualInterface.html)  |  arn:$\{Partition\}:directconnect:$\{Region\}:$\{Account\}:dxvif/$\{VirtualInterfaceId\}  |   [ aws:ResourceTag/$\{TagKey\} ](#awsdirectconnect-aws_ResourceTag___TagKey_)   | 
+|   [ dx\-gateway ](https://docs.aws.amazon.com/directconnect/latest/APIReference/API_DirectConnectGateway.html)  |  arn:$\{Partition\}:directconnect::$\{Account\}:dx\-gateway/$\{DirectConnectGatewayId\}  |  | 
 
 ## Condition Keys for AWS Direct Connect<a name="awsdirectconnect-policy-keys"></a>
 
-Direct Connect has no service\-specific context keys that can be used in the `Condition` element of policy statements\. For the list of the global context keys that are available to all services, see [Available Keys for Conditions](reference_policies_condition-keys.html#AvailableKeys) in the *IAM Policy Reference*\.
+AWS Direct Connect defines the following condition keys that can be used in the `Condition` element of an IAM policy\. You can use these keys to further refine the conditions under which the policy statement applies\. For details about the columns in the following table, see [The Condition Keys Table](reference_policies_actions-resources-contextkeys.md#context_keys_table)\.
+
+To view the global condition keys that are available to all services, see [Available Global Condition Keys](reference_policies_condition-keys.html#AvailableKeys) in the *IAM Policy Reference*\.
+
+
+****  
+
+| Condition Keys | Description | Type | 
+| --- | --- | --- | 
+|   [ aws:RequestTag/$\{TagKey\} ](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-requesttag)  | Filters actions based on the presence of tag key\-value pairs in the request | String | 
+|   [ aws:ResourceTag/$\{TagKey\} ](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-resourcetag)  | Filters actions based on tag key\-value pairs attached to the resource | String | 
+|   [ aws:TagKeys ](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-tagkeys)  | Filters actions based on the presence of tag keys in the request | String | 

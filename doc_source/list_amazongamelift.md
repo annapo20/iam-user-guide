@@ -9,12 +9,16 @@ References:
 
 **Topics**
 + [Actions Defined by Amazon GameLift](#amazongamelift-actions-as-permissions)
-+ [Resources Defined by GameLift](#amazongamelift-resources-for-iam-policies)
++ [Resources Defined by Amazon GameLift](#amazongamelift-resources-for-iam-policies)
 + [Condition Keys for Amazon GameLift](#amazongamelift-policy-keys)
 
 ## Actions Defined by Amazon GameLift<a name="amazongamelift-actions-as-permissions"></a>
 
-You can specify the following actions in the `Action` element of an IAM policy statement\. By using policies, you define the permissions for anyone performing an operation in AWS\. When you use an action in a policy, you usually allow or deny access to the API operation or CLI command with the same name\. However, in some cases, a single action controls access to more than one operation\. Alternatively, some operations require several different actions\. For details about the columns in the following table, see [The Actions Table](reference_policies_actions-resources-contextkeys.md#actions_table)\.
+You can specify the following actions in the `Action` element of an IAM policy statement\. Use policies to grant permissions to perform an operation in AWS\. When you use an action in a policy, you usually allow or deny access to the API operation or CLI command with the same name\. However, in some cases, a single action controls access to more than one operation\. Alternatively, some operations require several different actions\.
+
+The **Resource** column indicates whether each action supports resource\-level permissions\. If there is no value for this column, you must specify all resources \("\*"\) in the `Resource` element of your policy statement\. If the column includes a resource type, then you can specify an ARN of that type in a statement with that action\. Required resources are indicated in the table with an asterisk \(\*\)\. If you specify a resource\-level permission ARN in a statement using this action, then it must be of this type\. Some actions support multiple resource types\. If the resource type is optional \(not indicated as required\), then you can choose to use one but not the other\.
+
+For details about the columns in the following table, see [The Actions Table](reference_policies_actions-resources-contextkeys.md#actions_table)\.
 
 
 ****  
@@ -62,7 +66,7 @@ You can specify the following actions in the `Action` element of an IAM policy s
 |   [ UpdateGameSession ](https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateGameSession.html)  | Sets game session properties | Write |  |  |  | 
 |   [ UpdateRuntimeConfiguration ](https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateRuntimeConfiguration.html)  | Sets a fleet's runtime configuration, which specifies how to launch server processes on the fleet | Write |  |  |  | 
 
-## Resources Defined by GameLift<a name="amazongamelift-resources-for-iam-policies"></a>
+## Resources Defined by Amazon GameLift<a name="amazongamelift-resources-for-iam-policies"></a>
 
 Amazon GameLift has no service\-defined resources that can be used as the `Resource` element of an IAM policy statement\.
 

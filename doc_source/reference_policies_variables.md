@@ -1,5 +1,10 @@
 # IAM Policy Elements: Variables and Tags<a name="reference_policies_variables"></a>
 
+Use AWS Identity and Access Management \(IAM\) policy variables as placeholders when you don't know the exact value of a resource or condition key when you write the policy\.
+
+**Note**  
+If AWS cannot resolve a variable, this might cause the entire statement to be invalid\. For example, if you use the `aws:TokenIssueTime` variable, the variable resolves to a value only when the requester authenticated using temporary credentials \(an IAM role\)\. To prevent variables from causing invalid statements, use the [\.\.\.IfExists condition operator\.](reference_policies_elements_condition_operators.md#Conditions_IfExists)
+
 **Topics**
 + [Introduction](#policy-vars-intro)
 + [Tags as Policy Variables](#policy-vars-tags)
@@ -101,9 +106,9 @@ When you use a policy variable for the user name like this, you don't have to ha
 
 ## Tags as Policy Variables<a name="policy-vars-tags"></a>
 
-In some AWS services you can attach your own custom attributes to resources that are created by those services\. For example, you can apply tags to Amazon S3 buckets or to IAM users and roles\. These tags are key–value pairs\. You define the tag key name and the value associated with that key name\. For example, you might create a tag with a **department** key and a **Human Resources** value\. For more information about tagging IAM entities, see [Tagging IAM Identities](id_tags.md)\. For information about tagging resources created by other AWS services, see the documentation for that service\. For information about using Tag Editor, see [Working with Tag Editor](https://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/tag-editor.html) in the *AWS Management Console User Guide*\.
+In some AWS services you can attach your own custom attributes to resources that are created by those services\. For example, you can apply tags to Amazon S3 buckets or to IAM users and roles\. These tags are key–value pairs\. You define the tag key name and the value associated with that key name\. For example, you might create a tag with a **department** key and a **Human Resources** value\. For more information about tagging IAM entities, see [Tagging IAM Entities](id_tags.md)\. For information about tagging resources created by other AWS services, see the documentation for that service\. For information about using Tag Editor, see [Working with Tag Editor](https://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/tag-editor.html) in the *AWS Management Console User Guide*\.
 
-You can tag IAM identities to simplify discovering, organizing, and tracking your IAM resources\. You can also tag IAM identities to control access to resources or to tagging itself\. To learn more about using tags to control access, see [Controlling Access Using IAM Tags](access_iam-tags.md)\. 
+You can tag IAM identities to simplify discovering, organizing, and tracking your IAM resources\. You can also tag IAM identities to control access to resources or to tagging itself\. To learn more about using tags to control access, see [Controlling Access to and for IAM Users and Roles Using IAM Resource Tags](access_iam-tags.md)\. 
 
 ## Where You Can Use Policy Variables<a name="policy-vars-wheretouse"></a>
 
@@ -138,7 +143,7 @@ A policy variable can appear as the last part of the [ARN](https://docs.aws.amaz
 **Note**  
 This example uses the `aws:username` key, which returns the user's friendly name \(like "Adele" or "David"\)\. Under some circumstances, you might want to use the `aws:userid` key instead, which is a globally unique value\. For more information, see [Unique IDs](reference_identifiers.md#identifiers-unique-ids)\.
 
-The following policy might be used for an IAM group\. It gives users in that group the ability to create, use, and delete queues that have their names and that are in the us\-east\-2 region\.
+The following policy might be used for an IAM group\. It gives users in that group the ability to create, use, and delete queues that have their names and that are in the us\-east\-2 Region\.
 
 ```
 {
@@ -223,10 +228,10 @@ Policies contain keys whose values you can use as policy variables\. \(Under som
 **Important**  
 Key names are case\-insensitive\. For example, `aws:CurrentTime` is equivalent to `AWS:currenttime`\. 
 
-The values for `aws:username`, `aws:userid`, and `aws:principaltype` depend on what type of principal initiated the request\. For example, the request could be made using the credentials of an AWS account, an IAM user, an IAM role, and so on\. The following shows values for these keys for different types of principal\. 
+The values for `aws:username`, `aws:userid`, and `aws:principaltype` depend on what type of principal initiated the request\. For example, the request could be made using the credentials of an IAM user, an IAM role, or the AWS account root user\. The following shows values for these keys for different types of principals\. 
 
 For the items in this note the following:
-+ *not present* means that the value is not in the current request information, and any attempt to match it fails and causes the request to be denied\. 
++ *not present* means that the value is not in the current request information, and any attempt to match it fails and causes the statement to be invalid\. 
 + *role\-id* is a unique identifier assigned to each role at creation\. You can display the role ID with the AWS CLI command: `aws iam get-role --role-name rolename`
 + *caller\-specified\-name* and *caller\-specified\-role\-name* are names that are passed by the calling process \(such as an application or service\) when it makes a call to get temporary credentials\.
 + *ec2\-instance\-id* is a value assigned to the instance when it is launched and appears on the **Instances** page of the Amazon EC2 console\. You can also display the instance ID by running the AWS CLI command: `aws ec2 describe-instances`

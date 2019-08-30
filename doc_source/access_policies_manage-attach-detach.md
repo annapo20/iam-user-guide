@@ -19,10 +19,10 @@ When you associate permissions policies with identities \(users, groups, and rol
 + **Detach** – Used with managed policies\. You detach a managed policy from an entity \(a user, group, or role\)\. Detaching a policy removes its permissions from the principal entity\.
 + **Embed** – Used with inline policies\. You embed an inline policy in an identity \(a user, group, or role\)\. Embedding a policy applies the permissions in the policy to the identity\. Because an inline policy is stored in the identity, it is embedded rather than attached, though the results are similar\.
 **Note**  
-You can embed an inline policy for a *[service\-linked role](id_roles_terms-and-concepts.md#iam-term-service-linked-role)* only in the service that depends on the role\. See the [AWS documentation](http://docs.aws.amazon.com/) for your service to see whether it supports this feature\.
+You can embed an inline policy for a *[service\-linked role](id_roles_terms-and-concepts.md#iam-term-service-linked-role)* only in the service that depends on the role\. See the [AWS documentation](https://docs.aws.amazon.com/) for your service to see whether it supports this feature\.
 + **Delete** – Used with inline policies\. You delete an inline policy from an entity \(a user, group, or role\)\. Deleting a policy removes its permissions from the principal entity\.
 **Note**  
-You can delete an inline policy for a *[service\-linked role](id_roles_terms-and-concepts.md#iam-term-service-linked-role)* only in the service that depends on the role\. See the [AWS documentation](http://docs.aws.amazon.com/) for your service to see whether it supports this feature\.
+You can delete an inline policy for a *[service\-linked role](id_roles_terms-and-concepts.md#iam-term-service-linked-role)* only in the service that depends on the role\. See the [AWS documentation](https://docs.aws.amazon.com/) for your service to see whether it supports this feature\.
 
 You can use the console, AWS CLI, or AWS API to perform any of these actions\.
 
@@ -34,7 +34,7 @@ You can use the console, AWS CLI, or AWS API to perform any of these actions\.
 
 ## View Identity Activity<a name="attach-detach_prerequisites"></a>
 
-Before you change the permissions for an identity \(user, group, or role\), you should review their recent service\-level activity\. This is important because you don't want to remove access from a principal \(person or application\) who is using it\. For more information about viewing service last accessed data, see [Reducing Permissions Using Service Last Accessed Data](access_policies_access-advisor.md)\.
+Before you change the permissions for an identity \(user, group, or role\), you should review their recent service\-level activity\. This is important because you don't want to remove access from a principal \(person or application\) who is using it\. For more information about viewing service last accessed data, see [Refining Permissions Using Service Last Accessed Data](access_policies_access-advisor.md)\.
 
 ## Adding IAM Identity Permissions \(Console\)<a name="add-policies-console"></a>
 

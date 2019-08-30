@@ -9,12 +9,16 @@ References:
 
 **Topics**
 + [Actions Defined by Amazon Pinpoint SMS and Voice Service](#amazonpinpointsmsandvoiceservice-actions-as-permissions)
-+ [Resources Defined by Pinpoint SMS Voice](#amazonpinpointsmsandvoiceservice-resources-for-iam-policies)
++ [Resources Defined by Amazon Pinpoint SMS and Voice Service](#amazonpinpointsmsandvoiceservice-resources-for-iam-policies)
 + [Condition Keys for Amazon Pinpoint SMS and Voice Service](#amazonpinpointsmsandvoiceservice-policy-keys)
 
 ## Actions Defined by Amazon Pinpoint SMS and Voice Service<a name="amazonpinpointsmsandvoiceservice-actions-as-permissions"></a>
 
-You can specify the following actions in the `Action` element of an IAM policy statement\. By using policies, you define the permissions for anyone performing an operation in AWS\. When you use an action in a policy, you usually allow or deny access to the API operation or CLI command with the same name\. However, in some cases, a single action controls access to more than one operation\. Alternatively, some operations require several different actions\. For details about the columns in the following table, see [The Actions Table](reference_policies_actions-resources-contextkeys.md#actions_table)\.
+You can specify the following actions in the `Action` element of an IAM policy statement\. Use policies to grant permissions to perform an operation in AWS\. When you use an action in a policy, you usually allow or deny access to the API operation or CLI command with the same name\. However, in some cases, a single action controls access to more than one operation\. Alternatively, some operations require several different actions\.
+
+The **Resource** column indicates whether each action supports resource\-level permissions\. If there is no value for this column, you must specify all resources \("\*"\) in the `Resource` element of your policy statement\. If the column includes a resource type, then you can specify an ARN of that type in a statement with that action\. Required resources are indicated in the table with an asterisk \(\*\)\. If you specify a resource\-level permission ARN in a statement using this action, then it must be of this type\. Some actions support multiple resource types\. If the resource type is optional \(not indicated as required\), then you can choose to use one but not the other\.
+
+For details about the columns in the following table, see [The Actions Table](reference_policies_actions-resources-contextkeys.md#actions_table)\.
 
 
 ****  
@@ -26,10 +30,11 @@ You can specify the following actions in the `Action` element of an IAM policy s
 |   [ DeleteConfigurationSet ](https://docs.aws.amazon.com/pinpoint-sms-voice/latest/apireference/v1-sms-voice-configuration-sets-configurationsetname.html)  | Deletes an existing configuration set\. | Write |  |  |  | 
 |   [ DeleteConfigurationSetEventDestination ](https://docs.aws.amazon.com/pinpoint-sms-voice/latest/apireference/v1-sms-voice-configuration-sets-configurationsetname-event-destinations-eventdestinationname.html)  | Deletes an event destination in a configuration set\. | Write |  |  |  | 
 |   [ GetConfigurationSetEventDestinations ](https://docs.aws.amazon.com/pinpoint-sms-voice/latest/apireference/v1-sms-voice-configuration-sets-configurationsetname-event-destinations.html)  | Obtain information about an event destination, including the types of events it reports, the Amazon Resource Name \(ARN\) of the destination, and the name of the event destination\. | Read |  |  |  | 
+|   [ ListConfigurationSets ](https://docs.aws.amazon.com/pinpoint-sms-voice/latest/apireference/v1-sms-voice-configuration-sets.html)  | Return a list of configuration sets\. This operation only returns the configuration sets that are associated with your account in the current AWS Region\. | Read |  |  |  | 
 |   [ SendVoiceMessage ](https://docs.aws.amazon.com/pinpoint-sms-voice/latest/apireference/v1-sms-voice-voice-message.html)  | Create a new voice message and send it to a recipient's phone number\. | Write |  |  |  | 
 |   [ UpdateConfigurationSetEventDestination ](https://docs.aws.amazon.com/pinpoint-sms-voice/latest/apireference/v1-sms-voice-configuration-sets-configurationsetname-event-destinations-eventdestinationname.html)  | Update an event destination in a configuration set\. An event destination is a location that you publish information about your voice calls to\. For example, you can log an event to an Amazon CloudWatch destination when a call fails\. | Write |  |  |   iam:PassRole   | 
 
-## Resources Defined by Pinpoint SMS Voice<a name="amazonpinpointsmsandvoiceservice-resources-for-iam-policies"></a>
+## Resources Defined by Amazon Pinpoint SMS and Voice Service<a name="amazonpinpointsmsandvoiceservice-resources-for-iam-policies"></a>
 
 Amazon Pinpoint SMS and Voice Service has no service\-defined resources that can be used as the `Resource` element of an IAM policy statement\.
 

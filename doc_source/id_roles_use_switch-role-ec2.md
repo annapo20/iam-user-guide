@@ -9,7 +9,7 @@ Using roles to grant permissions to applications that run on EC2 instances requi
 Using roles in this way has several benefits\. Because role credentials are temporary and rotated automatically, you don't have to manage credentials, and you don't have to worry about long\-term security risks\. In addition, if you use a single role for multiple instances, you can make a change to that one role and the change is propagated automatically to all the instances\. 
 
 **Note**  
-Although a role is usually assigned to an EC2 instance when you launch it, a role can also be attached to an EC2 instance that is already running\. To learn how to attach a role to a running instance, see [IAM Roles for Amazon EC2](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#attach-iam-role)\.
+Although a role is usually assigned to an EC2 instance when you launch it, a role can also be attached to an EC2 instance that is already running\. To learn how to attach a role to a running instance, see [IAM Roles for Amazon EC2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#attach-iam-role)\.
 
 **Topics**
 + [How Do Roles for EC2 Instances Work?](#roles-usingrole-ec2instance-roles)
@@ -93,6 +93,122 @@ The following sample policy allows users to use the Amazon EC2 API to launch an 
 }
 ```
 
+### Allowing an Instance Profile Role to Switch to a Role in Another Account<a name="switch-role-ec2-another-account"></a>
+
+You can allow an application running on an Amazon EC2 instance to run commands in another account\. To do this, you must allow the EC2 instance role in in the first account to switch to a role in the second account\.
+
+Imagine that you are using two AWS accounts and you want to allow an application running on an Amazon EC2 instance to run [AWS CLI](http://aws.amazon.com/cli/) commands in both accounts\. Assume that the EC2 instance exists in account `111111111111`\. That instance includes the `abcd` instance profile role that allows the application to perform read\-only Amazon S3 tasks on the `my-bucket-1` bucket within the same `111111111111` account\. However, the application must also be allowed to assume the `efgh` cross\-account role to access the `my-bucket-2` Amazon S3 bucket in account `222222222222`\.
+
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/IAM/latest/UserGuide/images/roles-instance-profile-cross-account.png)
+
+The `abcd` EC2 instance profile role must have the following permissions policy to allow the application to access the `my-bucket-1` Amazon S3 bucket:
+
+***Account 111111111111 `abcd` Role Permissions Policy***
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowAccountLevelS3Actions",
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListAllMyBuckets",
+                "s3:HeadBucket"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "AllowListAndReadS3ActionOnMyBucket",
+            "Effect": "Allow",
+            "Action": [
+                "s3:Get*",
+                "s3:List*"
+            ],
+            "Resource": [
+                "arn:aws:s3:::my-bucket-1/*",
+                "arn:aws:s3:::my-bucket-1"
+            ]
+        },
+        {
+            "Sid": "AllowIPToAssumeCrossAccountRole",
+            "Effect": "Allow",
+            "Action": "sts:AssumeRole",
+            "Resource": "arn:aws:iam::222222222222:role/efgh"
+        }
+    ]
+}
+```
+
+The `abcd` role must trust the Amazon EC2 service to assume the role\. To do this, the `abcd` role must have the following trust policy:
+
+***Account 111111111111 `abcd` Role Trust Policy***
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "abcdTrustPolicy",
+            "Effect": "Allow",
+            "Action": "sts:AssumeRole",
+            "Principal": {"Service": "ec2.amazonaws.com"}
+        }
+    ]
+}
+```
+
+Assume that the `efgh` cross\-account role allows read\-only Amazon S3 tasks on the `my-bucket-2` bucket within the same `222222222222` account\. To do this, the `efgh` cross\-account role must have the following permissions policy:
+
+***Account 222222222222 `efgh` Role Permissions Policy***
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowAccountLevelS3Actions",
+            "Effect": "Allow",
+            "Action": [
+                "s3:ListAllMyBuckets",
+                "s3:HeadBucket"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "AllowListAndReadS3ActionOnMyBucket",
+            "Effect": "Allow",
+            "Action": [
+                "s3:Get*",
+                "s3:List*"
+            ],
+            "Resource": [
+                "arn:aws:s3:::my-bucket-2/*",
+                "arn:aws:s3:::my-bucket-2"
+            ]
+        }
+    ]
+}
+```
+
+The `efgh` role must trust the `abcd` instance profile role to assume it\. To do this, the `efgh` role must have the following trust policy:
+
+***Account 222222222222 `efgh` Role Trust Policy***
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "efghTrustPolicy",
+            "Effect": "Allow",
+            "Action": "sts:AssumeRole",
+            "Principal": {"AWS": "arn:aws:iam::111111111111:role/abcd"}
+        }
+    ]
+}
+```
+
 ## How Do I Get Started?<a name="roles-usingrole-ec2instance-get-started"></a>
 
 To understand how roles work with EC2 instances, you need to use the IAM console to create a role, launch an EC2 instance that uses that role, and then examine the running instance\. You can examine the [instance metadata](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AESDG-chapter-instancedata.html) to see how the role's temporary credentials are made available to an instance\. You can also see how an application that runs on an instance can use the role\. Use the following resources to learn more\. 
@@ -106,8 +222,8 @@ To understand how roles work with EC2 instances, you need to use the IAM console
 ## Related Information<a name="roles-usingrole-ec2instance-related-info"></a>
 
 For more information about creating roles or roles for EC2 instances, see the following information:
-+ For more information about [using IAM roles with Amazon EC2 instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UsingIAM.html#UsingIAMrolesWithAmazonEC2Instances), go to the *Amazon EC2 User Guide for Linux Instances*\.
++ For more information about [using IAM roles with Amazon EC2 instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html), go to the *Amazon EC2 User Guide for Linux Instances*\.
 + To create a role, see [Creating IAM Roles](id_roles_create.md)
 + For more information about using temporary security credentials, see [Temporary Security Credentials](id_credentials_temp.md)\.
 + If you work with the IAM API or CLI, you must create and manage IAM instance profiles\. For more information about instance profiles, see [Using Instance Profiles](id_roles_use_switch-role-ec2_instance-profiles.md)\.
-+ For more information about temporary security credentials for roles in the instance metadata, see [Retrieving Security Credentials from Instance Metadata](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#instance-metadata-security-credentials) in the Amazon EC2 User Guide for Linux Instances\.
++ For more information about temporary security credentials for roles in the instance metadata, see [Retrieving Security Credentials from Instance Metadata](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#instance-metadata-security-credentials) in the *Amazon EC2 User Guide for Linux Instances*\.

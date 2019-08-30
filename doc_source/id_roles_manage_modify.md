@@ -6,8 +6,8 @@ You can change or modify a role in IAM using the following methods:
 If a user is listed as the principal in a role's trust policy but cannot assume the role, check the user's [permissions boundary](access_policies_boundaries.md)\. If a permissions boundary is set for the user, then it must allow the `sts:AssumeRole` action\.
 + To change the permissions allowed by the role, modify the role's permissions policy \(or policies\)\. You cannot modify the permissions policy for a *[service\-linked role](id_roles_terms-and-concepts.md#iam-term-service-linked-role)* in IAM\. You might be able to modify the permissions policy within the service that depends on the role\. To check whether a service supports this feature, see [AWS Services That Work with IAM](reference_aws-services-that-work-with-iam.md) and look for the services that have **Yes **in the **Service\-linked roles** column\. Choose a **Yes** with a link to view the service\-linked role documentation for that service\.
 + To change the description of the role, modify the description text\.
-+ To change the set of tags on a role, see [Managing Tags on IAM Identities \(Console\)](id_tags.md#id_tags_procs-console)\.
-+ To specify the maximum session duration setting for roles that are assumed using the AWS CLI or API, modify the maximum session duration setting's value\. This setting can have a value from 1 hour to 12 hours\. If you do not specify a value, the default maximum of 1 hour is applied\. 
++ To change the set of tags on a role, see [Managing Tags on IAM Entities \(Console\)](id_tags.md#id_tags_procs-console)\.
++ To specify the maximum session duration setting for roles that are assumed using the AWS CLI or API, modify the maximum session duration setting's value\. This setting can have a value from 1 hour to 12 hours\. If you do not specify a value, the default maximum of 1 hour is applied\. This setting does not limit sessions assumed by AWS services\.
 **Note**  
 Anyone who assumes the role from the AWS CLI or API can use the `duration-seconds` CLI parameter or the `DurationSeconds` API parameter to request a longer session\. The `MaxSessionDuration` setting determines the maximum duration of the role session that can be requested using the `DurationSeconds` parameter\. If users don't specify a value for the `DurationSeconds` parameter, their security credentials are valid for one hour\.
 + To change the maximum permissions allowed for a role, modify the role's [permissions boundary](access_policies_boundaries.md)\.
@@ -22,7 +22,7 @@ You can use the AWS Management Console, the [AWS Command Line Tools](https://aws
 
 ## View Role Access<a name="roles-modify_prerequisites"></a>
 
-Before you change the permissions for a role, you should review its recent service\-level activity\. This is important because you don't want to remove access from a principal \(person or application\) who is using it\. For more information about viewing service last accessed data, see [Reducing Permissions Using Service Last Accessed Data](access_policies_access-advisor.md)\.
+Before you change the permissions for a role, you should review its recent service\-level activity\. This is important because you don't want to remove access from a principal \(person or application\) who is using it\. For more information about viewing service last accessed data, see [Refining Permissions Using Service Last Accessed Data](access_policies_access-advisor.md)\.
 
 ## Modifying a Role \(Console\)<a name="roles-managingrole-editing-console"></a>
 

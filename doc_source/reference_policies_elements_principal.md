@@ -1,6 +1,6 @@
-# IAM JSON Policy Elements: Principal<a name="reference_policies_elements_principal"></a>
+# AWS JSON Policy Elements: Principal<a name="reference_policies_elements_principal"></a>
 
-Use the `Principal` element to specify the user \(IAM user, federated user, or assumed\-role user\), AWS account, AWS service, or other principal entity that is allowed or denied access to a resource\. You use the `Principal` element in the trust policies for IAM roles and in resource\-based policies—that is, in policies that you embed directly in a resource\. For example, you can embed such policies in an Amazon S3 bucket, an Glacier vault, an Amazon SNS topic, an Amazon SQS queue, or an AWS KMS customer master key \(CMK\)\.
+Use the `Principal` element to specify the IAM user, federated user, IAM role, AWS account, AWS service, or other principal entity that is allowed or denied access to a resource\. You cannot use the `Principal` element in an IAM identity\-based policy\. You can use it in the trust policies for IAM roles and in resource\-based policies\. Resource\-based policies are policies that you embed directly in an IAM resource\. For example, you can embed policies in an Amazon S3 bucket or an AWS KMS customer master key \(CMK\)\.
 
 Use the `Principal` element in these ways:
 + In IAM roles, use the `Principal` element in the role's trust policy to specify who can assume the role\. For cross\-account access, you must specify the 12\-digit identifier of the trusted account\. 
@@ -18,7 +18,7 @@ The following examples show various ways in which principals can be specified\.
 
 **Specific AWS accounts**
 
-When you use an AWS account identifier as the principal in a policy, the permissions in the policy statement can be granted to all identities contained in that account\. This includes IAM users and roles in that account\. When you specify an AWS account, you can use the account ARN \(arn:aws:iam::*AWS\-account\-ID*:root\), or a shortened form that consists of the `AWS:` prefix followed by the account ID\.
+When you use an AWS account identifier as the principal in a policy, you delegate authority to the account\. Within that account, the permissions in the policy statement can be granted to all identities\. This includes IAM users and roles in that account\. When you specify an AWS account, you can use the account ARN \(arn:aws:iam::*AWS\-account\-ID*:root\), or a shortened form that consists of the `AWS:` prefix followed by the account ID\.
 
 For example, given an account ID of `123456789012`, you can use either of the following methods to specify that account in the `Principal` element:
 
@@ -107,7 +107,7 @@ If your `Principal` element in a role trust policy contains an ARN that points t
 
 **AWS service**
 
-IAM roles that can be assumed by an AWS service are called *[service roles](id_roles_terms-and-concepts.md#iam-term-service-role)*\. Service roles must include a trust policy\. *Trust policies* are resource\-based policies that are attached to a role that define which principals can assume the role\. Some service role have predefined trust policies\. However, in some cases, you must specify the service principal in the trust policy\. A *service principal* is an identifier that is used to grant permissions to a service\. The identifier includes the long version of a service name, and is usually in the following format:
+IAM roles that can be assumed by an AWS service are called *[service roles](id_roles_terms-and-concepts.md#iam-term-service-role)*\. Service roles must include a trust policy\. *Trust policies* are resource\-based policies that are attached to a role that define which principals can assume the role\. Some service roles have predefined trust policies\. However, in some cases, you must specify the service principal in the trust policy\. A *service principal* is an identifier that is used to grant permissions to a service\. The identifier includes the long version of a service name, and is usually in the following format:
 
 `long_service-name.amazonaws.com`
 
@@ -151,7 +151,7 @@ The following are equivalent:
 "Principal" : { "AWS" : "*" }
 ```
 
-**Note**  
+**Important**  
 In these examples, the asterisk \(\*\) is used as a placeholder for Everyone/Anonymous\. You cannot use it as a wildcard to match part of a name or an ARN\. We also strongly recommend that you do not use a wildcard in the `Principal` element in a role's trust policy unless you otherwise restrict access through a `Condition` element in the policy\. Otherwise, any IAM user in any account can access the role\.
 
 ## More Information<a name="Principal_more-info"></a>

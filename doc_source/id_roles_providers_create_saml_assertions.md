@@ -11,18 +11,18 @@ The following excerpt shows an example\. Substitute your own values for the mark
 <Subject>
   <NameID Format="urn:oasis:names:tc:SAML:2.0:nameid-format:persistent">_cbb88bf52c2510eabe00c1642d4643f41430fe25e3</NameID>
   <SubjectConfirmation Method="urn:oasis:names:tc:SAML:2.0:cm:bearer">
-    <SubjectConfirmationData NotOnOrAfter="2013-11-05T02:06:42.876Z" Recipient="https://signin.&awsdomain;/saml"/>
+    <SubjectConfirmationData NotOnOrAfter="2013-11-05T02:06:42.876Z" Recipient="https://signin.&home-domain;/saml"/>
   </SubjectConfirmation>
 </Subject>
 ```
 
 **`AudienceRestriction` and `Audience`**  
-For security reasons, AWS must be included as an audience in the SAML assertion your IdP sends to AWS\. For the value of the `Audience` element, specify either `https://signin.aws.amazon.com/saml` or `urn:amazon:webservices`\. The following sample XML snippets from SAML assertions show how this key can be specified by the IdP\. Include whichever sample applies to your use case\.  
+For security reasons, AWS should be included as an audience in the SAML assertion your IdP sends to AWS\. For the value of the `Audience` element, specify either `https://signin.aws.amazon.com/saml` or `urn:amazon:webservices`\. The following sample XML snippets from SAML assertions show how this key can be specified by the IdP\. Include whichever sample applies to your use case\.  
 
 ```
 <Conditions>
   <AudienceRestriction>
-    <Audience>https://signin.&awsdomain;/saml</Audience>
+    <Audience>https://signin.&home-domain;/saml</Audience>
   </AudienceRestriction>
 </Conditions>
 ```
@@ -58,7 +58,7 @@ The value of the `Name` attribute in the `Attribute` tag is case\-sensitive\. It
 </Attribute>
 ```
 
-**An optional `Attribute` element with the `SessionDuration` attribute set to `https://aws.amazon.com/SAML/Attributes/SessionDuration`**  
+**An optional `Attribute` element with the `Name` attribute set to `https://aws.amazon.com/SAML/Attributes/SessionDuration`**  
 This element contains one `AttributeValue` element that specifies how long that the user can access the AWS Management Console before having to request new temporary credentials\. The value is an integer representing the number of seconds for the session\. The value can range from 900 seconds \(15 minutes\) to 43200 seconds \(12 hours\)\. If this attribute is not present, then the credential last for one hour \(the default value of the `DurationSeconds` parameter of the `AssumeRoleWithSAML` API\)\.  
 To use this attribute, you must configure the SAML provider to provide single sign\-on access to the AWS Management Console through the console sign\-in web endpoint at `https://signin.aws.amazon.com/saml`\. Note that this attribute extends sessions only to the AWS Management Console\. It cannot extend the lifetime of other credentials\. However, if it is present in an `AssumeRoleWithSAML` API call, it can be used to *shorten* the lifetime of the credentials returned by the call to less than the default of 60 minutes\.   
 Note, too, that if a `SessionNotOnOrAfter` attribute is also defined, then the ***lesser*** value of the two attributes, `SessionDuration` or `SessionNotOnOrAfter`, establishes the maximum duration of the console session\.  

@@ -17,6 +17,16 @@ This procedure describes how to use the AWS Management Console to create an IAM 
 **Note**  
 We strongly recommend that you adhere to the best practice of using the **Administrator** IAM user below and securely lock away the root user credentials\. Sign in as the root user only to perform a few [account and service management tasks](https://docs.aws.amazon.com/general/latest/gr/aws_tasks-that-require-root.html)\.
 
+1. Enable access to billing data for the IAM admin user that you will create\.
+
+   1. On the navigation bar, choose your account name, and then choose **My Account**\. 
+
+   1. Next to **IAM User and Role Access to Billing Information**, choose **Edit**\. 
+
+   1. Select the check box to **Activate IAM Access** and choose **Update**\.
+
+   1. On the navigation bar, choose **Services** and then **IAM** to return to the IAM dashboard\.
+
 1. In the navigation pane, choose **Users** and then choose **Add user**\.
 
 1. For **User name**, type **Administrator**\.
@@ -31,13 +41,15 @@ We strongly recommend that you adhere to the best practice of using the **Admini
 
 1. In the **Create group** dialog box, for **Group name** type **Administrators**\.
 
-1. For **Filter policies**, select the check box for **AWS managed \- job function**\.
+1. Choose **Filter policies**, and then choose **AWS managed \- job function** to filter the table contents\.
 
 1. In the policy list, select the check box for **AdministratorAccess**\. Then choose **Create group**\.
-**Note**  
-You must activate IAM user and role access to Billing before you can use the `AdministratorAccess` permissions to access the AWS Billing and Cost Management console\. To do this, follow the instructions in [Step 1 of the tutorial about delegating access to the billing console](tutorial_billing.md)\.
 
 1. Back in the list of groups, select the check box for your new group\. Choose **Refresh** if necessary to see the group in the list\.
+
+1. Choose **Next: Tags**\.
+
+1. \(Optional\) Add metadata to the user by attaching tags as key\-value pairs\. For more information about using tags in IAM, see [Tagging IAM Entities](id_tags.md)\.
 
 1. Choose **Next: Review** to see the list of group memberships to be added to the new user\. When you are ready to proceed, choose **Create user**\.
 
@@ -142,5 +154,5 @@ For related information found in the *Amazon Web Services General Reference*, se
 + [AWS Tasks that Require Account Root User](https://docs.aws.amazon.com/general/latest/gr/aws_tasks-that-require-root.html)
 
 For related information in the *IAM User Guide*, see the following resources:
-+ [Reducing Permissions Using Service Last Accessed Data](access_policies_access-advisor.md)
++ [Refining Permissions Using Service Last Accessed Data](access_policies_access-advisor.md)
 + [Tutorial: Delegate Access to the Billing Console](tutorial_billing.md)

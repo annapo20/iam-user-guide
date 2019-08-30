@@ -24,7 +24,7 @@ String condition operators let you construct `Condition` elements that restrict 
 |   `StringNotEquals`   |  Negated matching  | 
 |   `StringEqualsIgnoreCase`   |  Exact matching, ignoring case  | 
 |   `StringNotEqualsIgnoreCase`   |  Negated matching, ignoring case  | 
-|   `StringLike`   |  Case\-sensitive matching\. The values can include a multi\-character match wildcard \(\*\) or a single\-character match wildcard \(?\) anywhere in the string\.  If a key contains multiple values, `StringLike` can be qualified with set operators—`ForAllValues:StringLike` and `ForAnyValue:StringLike`\. For more information, see [Creating a Condition That Tests Multiple Key Values \(Set Operations\)](reference_policies_multi-value-conditions.md)\.    | 
+|   `StringLike`   |  Case\-sensitive matching\. The values can include a multi\-character match wildcard \(\*\) or a single\-character match wildcard \(?\) anywhere in the string\.  If a key contains multiple values, `StringLike` can be qualified with set operators—`ForAllValues:StringLike` and `ForAnyValue:StringLike`\. For more information, see [Creating a Condition with Multiple Keys or Values](reference_policies_multi-value-conditions.md)\.    | 
 |   `StringNotLike`   |  Negated case\-sensitive matching\. The values can include a multi\-character match wildcard \(\*\) or a single\-character match wildcard \(?\) anywhere in the string\.  | 
 
 For example, the following statement contains a `Condition` element that uses the `StringEquals` condition operator with the `aws:UserAgent` key to specify that the request must include a specific value in its user agent header\.
@@ -244,7 +244,7 @@ Amazon Resource Name \(ARN\) condition operators let you construct `Condition` e
 |   `ArnEquals`, `ArnLike`  |  Case\-sensitive matching of the ARN\. Each of the six colon\-delimited components of the ARN is checked separately and each can include a multi\-character match wildcard \(\*\) or a single\-character match wildcard \(?\)\. These behave identically\.  | 
 |   `ArnNotEquals`, `ArnNotLike`  |  Negated matching for ARN\. These behave identically\.  | 
 
-The following example shows a policy you need to attach to any Amazon SNS queue to which you want to send SNS messages\. It gives Amazon SNS permission to send messages to the queue \(or queues\) of your choice, but only if the service is sending the messages on behalf of a particular Amazon SNS topic \(or topics\)\. You specify the queue in the `Resource` field, and the Amazon SNS topic as the value for the `SourceArn` key\.
+The following example shows a policy you need to attach to any Amazon SQS queue to which you want to send SNS messages\. It gives Amazon SNS permission to send messages to the queue \(or queues\) of your choice, but only if the service is sending the messages on behalf of a particular Amazon SNS topic \(or topics\)\. You specify the queue in the `Resource` field, and the Amazon SNS topic as the value for the `SourceArn` key\.
 
 ```
 {
